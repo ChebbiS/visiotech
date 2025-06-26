@@ -1,23 +1,13 @@
 import * as React from 'react';
-import {styled, alpha} from '@mui/material/styles';
-import {
-    AppBar,
-    Box,
-    Toolbar,
-    IconButton,
-    Typography,
-    InputBase,
-    MenuItem,
-    Menu
-} from '@mui/material';
+import {AppBar, Box, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography,} from '@mui/material';
+import {alpha, styled} from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {useNavigate} from 'react-router';
+import Drawer from './Drawer';
 
-
-const Search = styled('div')(({theme}) => ({
+const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -33,7 +23,7 @@ const Search = styled('div')(({theme}) => ({
     },
 }));
 
-const SearchIconWrapper = styled('div')(({theme}) => ({
+const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -43,7 +33,7 @@ const SearchIconWrapper = styled('div')(({theme}) => ({
     justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({theme}) => ({
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
@@ -57,10 +47,9 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-    const navigate = useNavigate();
-
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -82,25 +71,14 @@ export default function PrimarySearchAppBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const menuPages = [
-        {name: 'Dashboard', path: '/'},
-        {name: 'Favorite', path: '/favorite'},
-        {name: 'Login', path: '/login'},
-        {name: 'Movie Details', path: '/movieDetails'},
-        {name: 'People Details', path: '/peopleDetails'},
-        {name: 'Research', path: '/research'},
-        {name: 'SeenMovie', path: '/seenMovie'},
-        {name: 'Setting', path: '/setting'},
-    ];
-
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             id={menuId}
             keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
@@ -113,34 +91,16 @@ export default function PrimarySearchAppBar() {
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             id={mobileMenuId}
             keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            {menuPages.map((item) => (
-                <MenuItem
-                    key={item.name}
-                    onClick={() => {
-                        navigate(item.path);
-                        handleMobileMenuClose();
-                    }}
-                >
-                    {item.name}
-                </MenuItem>
-            ))}
-
             <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle/>
+                <IconButton size="large" color="inherit">
+                    <AccountCircle />
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
@@ -148,7 +108,7 @@ export default function PrimarySearchAppBar() {
     );
 
     return (
-        <Box sx={{flexGrow: 1}}>
+        <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -156,44 +116,43 @@ export default function PrimarySearchAppBar() {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{mr: 2}}
-                        onClick={handleMobileMenuOpen}  // <-- ajout ici !
+                        sx={{ mr: 2 }}
+                        onClick={() => setDrawerOpen(true)}
                     >
-                        <MenuIcon/>
+                        <MenuIcon />
                     </IconButton>
-
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{display: {xs: 'none', sm: 'block'}}}
+                        sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        MUI
+                        Ma Visiographie
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
-                            <SearchIcon/>
+                            <SearchIcon />
                         </SearchIconWrapper>
                         <StyledInputBase
                             placeholder="Search…"
-                            inputProps={{'aria-label': 'search'}}
+                            inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <Box sx={{flexGrow: 1}}/>
-                    <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton
                             size="large"
                             edge="end"
-                            aria-label="account of current user"
+                            aria-label="account"
                             aria-controls={menuId}
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            <AccountCircle/>
+                            <AccountCircle />
                         </IconButton>
                     </Box>
-                    <Box sx={{display: {xs: 'flex', md: 'none'}}}>
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
                             aria-label="show more"
@@ -202,13 +161,14 @@ export default function PrimarySearchAppBar() {
                             onClick={handleMobileMenuOpen}
                             color="inherit"
                         >
-                            <MoreIcon/>
+                            <MoreIcon />
                         </IconButton>
                     </Box>
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
+            <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
         </Box>
     );
 }
