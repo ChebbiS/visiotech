@@ -10,10 +10,12 @@ import SeenMovie from "../pages/B_body/SeenMovie.tsx";
 import Setting from "../pages/B_body/Setting.tsx";
 import LayoutWithBar from "../layout/LayoutWithBar.tsx";
 import LayoutWithoutBar from "../layout/LayoutWithoutBar.tsx";
+import ProtectedRoute from "../components/ProtectedRoute.tsx";
 
 const Router= () => {
     return (
             <Routes>
+                <Route element={<ProtectedRoute />}>
                 <Route element={<LayoutWithBar />}>
                     <Route path="/" element={<Dashboard/>}/>
                     <Route path="/favorite" element={<Favorite/>}/>
@@ -23,6 +25,7 @@ const Router= () => {
                     <Route path="/seenMovie" element={<SeenMovie/>}/>
                     <Route path="/setting" element={<Setting/>}/>
                 </Route>
+                    </Route>
 
                 <Route element={<LayoutWithoutBar />}>
                     <Route path="/login" element={<Login/>}/>

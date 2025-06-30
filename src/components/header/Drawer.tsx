@@ -37,23 +37,24 @@ export default function DrawerMenu({open, onClose}: Props) {
             PaperProps={{
                 sx: {
                     backgroundColor: '#000',
-                    color: '#f44336',
+                    color: '#800000',
                     width: 250,
                 },
             }}
         >
             <Box role="presentation" sx={{height: '100%'}}>
                 <Toolbar sx={{justifyContent: 'flex-end'}}>
-                    <IconButton onClick={onClose} sx={{color: '#f44336'}}>
-                        <Typography display={"flex"} justifyContent={"center"} alignItems={"center"}>Menu</Typography>
+                    <IconButton onClick={onClose} sx={{color: '#800000'}}>
+                        <Typography display={"flex"} justifyContent={"center"} alignItems={"center"} sx={{fontSize: '1em'}}>Menu</Typography>
                         <ChevronLeftIcon/>
                     </IconButton>
                 </Toolbar>
-                <Divider sx={{borderColor: '#f44336'}}/>
+                <Divider sx={{borderColor: '#800000'}}/>
                 <List>
                     {menuPages.map((item) => (
                         <ListItem key={item.name} disablePadding>
                             <ListItemButton
+
                                 onClick={() => {
                                     navigate(item.path);
                                     onClose();
@@ -61,12 +62,14 @@ export default function DrawerMenu({open, onClose}: Props) {
                                 sx={{
                                     '&:hover': {
                                         backgroundColor: '#111',
+
                                     },
                                 }}
                             >
                                 <ListItemText
+
                                     primary={
-                                        <Typography sx={{color: '#f44336'}}>
+                                        <Typography sx={{color: '#800000',fontSize: '1.5em', textAlign:'center', paddingBottom:'20px'}}>
                                             {item.name}
                                         </Typography>
                                     }

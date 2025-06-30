@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Box, Typography} from '@mui/material';
-import MovieItem from '../../components/MovieItem.tsx'; // Assure-toi que ce chemin est bon
+import MovieItem from '../../components/MovieItem.tsx';
 import favorisData from '../../dataFake/movie_favoris_collection.json';
 
 const Favorite = () => {

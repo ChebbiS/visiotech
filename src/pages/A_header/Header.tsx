@@ -4,7 +4,7 @@ import AppBar from "../../components/AppBar.tsx";
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#e53935',
+            main: '#800000',
         },
     },
 });
