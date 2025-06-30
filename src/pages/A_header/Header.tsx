@@ -1,11 +1,10 @@
-import {Stack} from "@mui/material";
+import {createTheme, CssBaseline, Stack, ThemeProvider} from "@mui/material";
 import AppBar from "../../components/AppBar.tsx";
-import {ThemeProvider, createTheme, CssBaseline} from '@mui/material';
 
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#e53935', // rouge
+            main: '#e53935',
         },
     },
 });

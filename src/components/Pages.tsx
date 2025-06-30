@@ -1,14 +1,17 @@
 import {Box} from "@mui/material";
+import type {ReactNode} from "react";
 
-const Pages = ({children, title}) => {
+type PagesProps = {
+    children: ReactNode;
+    title: string;
+};
 
+const Pages = ({children, title}: PagesProps) => {
     return (
-        <>
-            <Box ml="110px" mt="64px">
-                <title>{title}</title>
-                {children}
-            </Box>
-        </>
+        <Box ml="110px" mt="64px">
+            <title>{title}</title>
+            {children}
+        </Box>
     );
 };
 

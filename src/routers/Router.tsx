@@ -17,9 +17,9 @@ const Router= () => {
                 <Route element={<LayoutWithBar />}>
                     <Route path="/" element={<Dashboard/>}/>
                     <Route path="/favorite" element={<Favorite/>}/>
-                    <Route path="/movieDetails" element={<MovieDetails/>}/>
-                    <Route path="/peopleDetails" element={<PeopleDetails/>}/>
-                    <Route path="/research" element={<Research/>}/>
+                    <Route path="/movieDetails/:id" element={<MovieDetails/>}/>
+                    <Route path="/peopleDetails/:id" element={<PeopleDetails/>}/>
+                    <Route path="/research/:query" element={<Research/>}/>
                     <Route path="/seenMovie" element={<SeenMovie/>}/>
                     <Route path="/setting" element={<Setting/>}/>
                 </Route>

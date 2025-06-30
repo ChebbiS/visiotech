@@ -1,14 +1,27 @@
-import Pages from "../../components/Pages";
+import {useEffect, useState} from 'react';
+import {Box, Typography} from '@mui/material';
+import MovieItem from '../../components/MovieItem.tsx'; // Assure-toi que ce chemin est bon
+import favorisData from '../../dataFake/movie_favoris_collection.json';
 
 const Favorite = () => {
+    const [movies, setMovies] = useState<any[]>([]);
+
+    useEffect(() => {
+        setMovies(favorisData.results);
+    }, []);
+
     return (
-        <>
-            <Pages title="Favoris">
-            <h1>Coucou, je suis dans le Favorite</h1>
-            </Pages>
-        </>
+        <Box p={4}>
+            <Typography variant="h4" color="white" gutterBottom>
+                🎬 Mes films favoris
+            </Typography>
+            <Box display="flex" flexWrap="wrap">
+                {movies.map((movie) => (
+                    <MovieItem key={movie.id} movieId={movie.id}/>
+                ))}
+            </Box>
+        </Box>
     );
 };
 
 export default Favorite;
-

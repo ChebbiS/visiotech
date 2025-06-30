@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
-import {Box, Card, CardContent, CardMedia, IconButton, Stack, Typography} from "@mui/material";
+import {Box, Card, CardMedia, IconButton, Stack, Typography} from "@mui/material";
 import {ArrowBackIos, ArrowForwardIos} from "@mui/icons-material";
-
+import {useNavigate} from 'react-router';
 const CARDS_PER_VIEW = 4;
 
-export default function MovieCarousel() {
+export function MovieCarousel() {
     const [movies, setMovies] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("/src/dataFake/movie_popular.json")
@@ -28,7 +29,11 @@ export default function MovieCarousel() {
     const visibleMovies = movies.slice(startIndex, startIndex + CARDS_PER_VIEW);
 
     return (
-        <Box sx={{position: "relative", width: "100%", p: 2}}>
+        <Box sx={{
+            position: "relative",
+            width: "100%",
+            padding: 2,
+        }}>
             <Typography variant="h5" gutterBottom>
                 Films Populaires
             </Typography>
@@ -39,6 +44,7 @@ export default function MovieCarousel() {
                     alignItems: "center",
                     position: "relative",
                     width: "100%",
+
                 }}
             >
                 <IconButton
@@ -50,36 +56,46 @@ export default function MovieCarousel() {
                 </IconButton>
                 <Stack
                     direction="row"
-                    spacing={2}
+                    spacing={6}
                     sx={{
                         overflow: "hidden",
                         flex: 1,
                         px: 1,
+                        padding: "1em",
+
                     }}
                 >
-                    {visibleMovies.map((movie) => (
+                    {visibleMovies.map(({id, poster_path, title}) => (
                         <Card
-                            key={movie.id}
-                            sx={{minWidth: 200, maxWidth: 220, flex: "0 0 auto"}}
+                            onClick={() => navigate(`/movieDetails/${id}`)}
+                            key={id}
+                            sx={{
+                                minWidth: 200,
+                                maxWidth: 220,
+                                flex: "0 0 auto",
+                                borderRadius: "10px",
+                                backgroundColor: "#000",
+                                overflow: "hidden",
+                                cursor: "pointer",
+                                '&:hover': {
+                                    boxShadow: "0 0 15px 4px rgba(255, 0, 0, 0.6)",
+                                    cursor: "pointer",
+                                },
+                            }}
                         >
                             <CardMedia
                                 component="img"
                                 height="300"
-                                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                alt={movie.title}
+                                image={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                                alt={title}
                             />
-                            <CardContent>
-                                <Typography variant="body2" noWrap>
-                                    {movie.title}
-                                </Typography>
-                            </CardContent>
                         </Card>
 
                     ))}
                     <IconButton
                         onClick={handleNext}
                         disabled={startIndex + CARDS_PER_VIEW >= movies.length}
-                        sx={{zIndex: 1, color: "white" }}
+                        sx={{zIndex: 1, color: "white"}}
                     >
                         <ArrowForwardIos/>
                     </IconButton>
