@@ -141,10 +141,15 @@ export default function PrimarySearchAppBar() {
                             edge="end"
                             aria-label="account"
                             aria-haspopup="true"
-                            onClick={() => navigate('/login')}
+                            onClick={() => {
+                                navigate('/login');
+                                localStorage.removeItem("1");
+                            }}
                             color="inherit"
                         >
+
                             <AccountCircle/>
+
                         </IconButton>
                     </Box>
                     <Box sx={{display: {xs: 'flex', md: 'none'}}}>

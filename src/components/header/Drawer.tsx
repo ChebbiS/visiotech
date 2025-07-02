@@ -21,7 +21,6 @@ type Props = {
 const menuPages = [
     {name: 'Dashboard', path: '/'},
     {name: 'Favorite', path: '/favorite'},
-    {name: 'Login', path: '/login'},
     {name: 'SeenMovie', path: '/seenMovie'},
     {name: 'Setting', path: '/setting'},
 ];
@@ -67,7 +66,6 @@ export default function DrawerMenu({open, onClose}: Props) {
                                 }}
                             >
                                 <ListItemText
-
                                     primary={
                                         <Typography sx={{color: '#800000',fontSize: '1.5em', textAlign:'center', paddingBottom:'20px'}}>
                                             {item.name}

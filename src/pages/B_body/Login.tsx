@@ -36,7 +36,7 @@ function Login() {
 
     const onSubmit = (data: { email: string; password: string }) => {
         if (data.email === "said@said.fr" && data.password === "saidchebbi") {
-            localStorage.setItem("token", "said-token");
+            localStorage.setItem("1", "token");
             navigate("/");
         } else {
             alert("Identifiants incorrects !");
