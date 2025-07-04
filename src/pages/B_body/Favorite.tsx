@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react';
 import {Box, Typography} from '@mui/material';
 import MovieItem from '../../components/MovieItem.tsx';
+import type {Movie_favoris_collection} from "../../@types/Movie_favoris_collection";
 import favorisData from '../../dataFake/movie_favoris_collection.json';
 
 const Favorite = () => {
-    const [movies, setMovies] = useState<any[]>([]);
+    const [movies, setMovies] = useState<Movie_favoris_collection[]>([]);
 
     useEffect(() => {
         setMovies(favorisData.results);

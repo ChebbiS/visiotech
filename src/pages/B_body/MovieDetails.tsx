@@ -1,6 +1,9 @@
 import {useParams, useNavigate} from 'react-router';
 import {useEffect, useState} from 'react';
-import {Box, Typography, Avatar, Grid} from '@mui/material';
+import {Box, Typography, Avatar} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import type {MovieDetails} from "../../@types/MovieDetails";
+
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 const API_KEY = "c5817db100db1e3666ffaa6a17957b09";
@@ -8,7 +11,7 @@ const API_KEY = "c5817db100db1e3666ffaa6a17957b09";
 const MovieDetails = () => {
     const {id} = useParams();
     const navigate = useNavigate();
-    const [movie, setMovie] = useState<any>(null);
+    const [movie, setMovie] = useState<MovieDetails>();
     const [cast, setCast] = useState<any[]>([]);
 
     useEffect(() => {
@@ -51,11 +54,10 @@ const MovieDetails = () => {
                 🎭 Genres : {movie.genres.map((g: any) => g.name).join(', ')}
             </Typography>
 
-            {/* Acteurs */}
             <Typography variant="h5" mt={4} mb={2}>🎬 Acteurs</Typography>
             <Grid container spacing={2}>
                 {cast.map((actor) => (
-                    <Grid item key={actor.id} xs={6} sm={4} md={3} lg={2}>
+                    <Grid key={actor.id} size={{xs:6, sm:4,md:3,lg:2}}>
                         <Box
                             textAlign="center"
                             sx={{cursor: 'pointer'}}

@@ -1,12 +1,13 @@
 import Pages from "../../components/Pages.tsx";
 import {Container, Grid} from "@mui/material";
-import {MovieCarousel as Carrousel} from "../../components/Carrousel.tsx";
 import CarrouselTop from "../../components/CarrouselTop.tsx";
 import MovieItem from "../../components/MovieItem.tsx";
 import movies from "../../dataFake/movie_collection.json";
+import Carrousel from "../../components/Carrousel.tsx";
 
 
 const Dashboard= () => {
+
     return (
         <>
             <Pages title="Dashboard">

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {AppBar, Box, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography,} from '@mui/material';
+import {AppBar, Box, IconButton, InputBase, ListItemIcon, Menu, MenuItem, Toolbar, Typography,} from '@mui/material';
 import {alpha, styled} from '@mui/material/styles';
-import MenuIcon from '@mui/icons-material/Menu';
+import LogoutIcon from '@mui/icons-material/Logout';
 import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Drawer from './header/Drawer';
 import {useNavigate} from 'react-router';
+import { Settings } from '@mui/icons-material';
 
 const Search = styled('div')(({theme}) => ({
     position: 'relative',
@@ -49,11 +49,10 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 export default function PrimarySearchAppBar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [drawerOpen, setDrawerOpen] = React.useState(false);
+
 
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
 
 
     const handleMobileMenuClose = () => {
@@ -64,8 +63,6 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
-
-
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -78,11 +75,21 @@ export default function PrimarySearchAppBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton size="large" color="inherit">
-                    <AccountCircle/>
+            <MenuItem onClick={() => navigate('/setting')}>
+                <ListItemIcon>
+                    <Settings fontSize={"small"} color={"primary"}/>
+                </ListItemIcon>
+                <p style={{color: "#800000"}}>Settings</p>
+            </MenuItem>
+            <MenuItem
+                onClick={() => {
+                    navigate('/login');
+                    localStorage.removeItem("1");
+                }}>
+                <IconButton size="small" color="primary">
+                    <LogoutIcon/>
                 </IconButton>
-                <p>Profile</p>
+                <p style={{color:"#800000"}}>Se déconnecter</p>
             </MenuItem>
         </Menu>
     );
@@ -99,32 +106,24 @@ export default function PrimarySearchAppBar() {
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{mr: 2}}
-                        onClick={() => setDrawerOpen(true)}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
+                    <Drawer/>
                     <Typography
                         onClick={() => navigate('/')}
-                        variant="h6"
+                        marginLeft="0.5em"
+                        variant="h4"
                         noWrap
                         component="div"
                         sx={{display: {xs: 'none', sm: 'block', cursor: "pointer"}}}
                     >
-                        Ma Visiographie
+                        SadTrack
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
                         </SearchIconWrapper>
                         <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{'aria-label': 'search'}}
+                            placeholder="Recherche un film…"
+                            inputProps={{'aria-label': 'Recherche'}}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onKeyDown={(e) => {
@@ -139,7 +138,7 @@ export default function PrimarySearchAppBar() {
                         <IconButton
                             size="large"
                             edge="end"
-                            aria-label="account"
+                            aria-label="logout"
                             aria-haspopup="true"
                             onClick={() => {
                                 navigate('/login');
@@ -147,8 +146,7 @@ export default function PrimarySearchAppBar() {
                             }}
                             color="inherit"
                         >
-
-                            <AccountCircle/>
+                            <LogoutIcon/>
 
                         </IconButton>
                     </Box>
@@ -167,7 +165,6 @@ export default function PrimarySearchAppBar() {
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
-            <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}/>
         </Box>
     );
 }

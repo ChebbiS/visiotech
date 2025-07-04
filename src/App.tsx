@@ -15,7 +15,7 @@ const App = () => {
         document.body.style.padding = "0";
 
 
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('1');
 
         if (token) {
             setIsLoggedIn(true);

@@ -8,7 +8,7 @@ type PagesProps = {
 
 const Pages = ({children, title}: PagesProps) => {
     return (
-        <Box ml="110px" mt="64px">
+        <Box>
             <title>{title}</title>
             {children}
         </Box>

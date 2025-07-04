@@ -2,15 +2,16 @@ import {useEffect, useState} from "react";
 import {Box, Card, CardMedia, IconButton, Stack, Typography} from "@mui/material";
 import {ArrowBackIos, ArrowForwardIos} from "@mui/icons-material";
 import {useNavigate} from 'react-router';
+
 const CARDS_PER_VIEW = 4;
 
-export function MovieCarousel() {
+export default function MovieCarousel() {
     const [movies, setMovies] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("/src/dataFake/movie_popular.json")
+        fetch("../../../src/dataFake/movie_popular.json")
             .then((res) => res.json())
             .then((data) => setMovies(data.results || []))
             .catch((err) => console.error("Erreur de chargement des films :", err));
@@ -35,7 +36,7 @@ export function MovieCarousel() {
             padding: 2,
         }}>
             <Typography variant="h5" gutterBottom>
-                Films Populaires
+                Films les plus populaires
             </Typography>
 
             <Box
