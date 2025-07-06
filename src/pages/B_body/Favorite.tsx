@@ -3,6 +3,8 @@ import {Box, Typography} from '@mui/material';
 import MovieItem from '../../components/MovieItem.tsx';
 import type {Movie_favoris_collection} from "../../@types/Movie_favoris_collection";
 import favorisData from '../../dataFake/movie_favoris_collection.json';
+import Pages from '../../components/Pages.tsx';
+
 
 const Favorite = () => {
     const [movies, setMovies] = useState<Movie_favoris_collection[]>([]);
@@ -12,6 +14,7 @@ const Favorite = () => {
     }, []);
 
     return (
+        <Pages title={"Favoris"}>
         <Box p={4}>
             <Typography variant="h4" color="white" gutterBottom>
                 🎬 Mes films favoris
@@ -22,6 +25,7 @@ const Favorite = () => {
                 ))}
             </Box>
         </Box>
+        </Pages>
     );
 };
 

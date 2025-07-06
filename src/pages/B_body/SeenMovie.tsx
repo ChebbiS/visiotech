@@ -3,6 +3,7 @@ import {Box, Typography} from '@mui/material';
 import MovieItem from '../../components/MovieItem.tsx';
 import type {UserSeenCollection} from "../../@types/people_favoris_collection";
 import favorisData from '../../dataFake/people_movie_collection.json';
+import Pages from '../../components/Pages.tsx';
 
 const Favorite = () => {
     const [movies, setMovies] = useState<UserSeenCollection[]>([]);
@@ -12,6 +13,7 @@ const Favorite = () => {
     }, []);
 
     return (
+        <Pages title={"Film déjà vu"}>
         <Box p={4}>
             <Typography variant="h4" color="white" gutterBottom>
                 🎬 Mes films déjà vu
@@ -22,6 +24,7 @@ const Favorite = () => {
                 ))}
             </Box>
         </Box>
+        </Pages>
     );
 };
 

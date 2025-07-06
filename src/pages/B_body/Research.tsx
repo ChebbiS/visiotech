@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router";
 import {Box, Card, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import Pages from "../../components/Pages";
+
 
 const API_KEY = "c5817db100db1e3666ffaa6a17957b09";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -40,6 +42,7 @@ export default function Research() {
     }
 
     return (
+        <Pages title={"Recherche"}>
         <Box p={4}>
             <Typography variant="h4" mb={3}>
                 Résultats de recherche pour : "{query}"
@@ -50,7 +53,7 @@ export default function Research() {
             ) : (
                 <Grid container spacing={3}>
                     {movies.map((movie) => (
-                        <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
+                        <Grid key={movie.id} size={{xs:12, sm:6, md:4, lg:3}}>
                             <Card
                                 sx={{cursor: "pointer"}}
                                 onClick={() => navigate(`/movieDetails/${movie.id}`)}
@@ -77,5 +80,6 @@ export default function Research() {
                 </Grid>
             )}
         </Box>
+        </Pages>
     );
 }

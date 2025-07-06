@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {Box, Typography, Avatar} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import type {MovieDetails} from "../../@types/MovieDetails";
+import Pages from '../../components/Pages';
 
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
@@ -38,6 +39,7 @@ const MovieDetails = () => {
     if (!movie) return <div>Chargement...</div>;
 
     return (
+        <Pages title={"Détails du film"}>
         <Box p={4} sx={{color: 'white', backgroundColor: '#121212'}}>
             <img
                 src={baseUrl + movie.poster_path}
@@ -85,6 +87,7 @@ const MovieDetails = () => {
                 ))}
             </Grid>
         </Box>
+        </Pages>
     );
 };
 

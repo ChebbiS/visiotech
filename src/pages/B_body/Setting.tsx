@@ -1,11 +1,12 @@
 import {Box, Button, FormControl, InputLabel, MenuItem, Select, Typography} from '@mui/material';
 import {useNavigate} from 'react-router';
+import Pages from '../../components/Pages';
 
 const Settings = () => {
     const navigate = useNavigate();
     return (
 
-
+<Pages title={"Paramètres"}>
         <Box sx={{maxWidth: 600, margin: '0 auto', padding: 3}}>
             <Typography variant="h4" gutterBottom>
                 Paramètres de l'application
@@ -32,7 +33,7 @@ const Settings = () => {
                 Retour
             </Button>
         </Box>
-
+</Pages>
     );
 };
 
