@@ -1,13 +1,28 @@
-import Pages from "../../components/Pages";
+import {useEffect, useState} from 'react';
+import {Box, Typography} from '@mui/material';
+import MovieItem from '../../components/MovieItem.tsx';
+import type {UserSeenCollection} from "../../@types/people_favoris_collection";
+import favorisData from '../../dataFake/people_movie_collection.json';
 
-const SeenMovie= () => {
+const Favorite = () => {
+    const [movies, setMovies] = useState<UserSeenCollection[]>([]);
+
+    useEffect(() => {
+        setMovies(favorisData.cast);
+    }, []);
+
     return (
-        <>
-            <Pages title={"Seen Movie"}>
-            <h1>Coucou, je suis dans le SeenMovie</h1>
-            </Pages>
-        </>
+        <Box p={4}>
+            <Typography variant="h4" color="white" gutterBottom>
+                🎬 Mes films déjà vu
+            </Typography>
+            <Box display="flex" flexWrap="wrap">
+                {movies.map((movie) => (
+                    <MovieItem key={movie.id} movieId={movie.id}/>
+                ))}
+            </Box>
+        </Box>
     );
 };
 
-export default SeenMovie;
+export default Favorite;
