@@ -1,9 +1,10 @@
 import {useParams, useNavigate} from 'react-router';
 import {useEffect, useState} from 'react';
-import {Box, Typography, Avatar} from '@mui/material';
+import {Box, Typography, Avatar, Stack, IconButton} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import type {MovieDetails} from "../../@types/MovieDetails";
 import Pages from '../../components/Pages';
+import { ArrowBackIos } from '@mui/icons-material';
 
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
@@ -41,6 +42,14 @@ const MovieDetails = () => {
     return (
         <Pages title={"Détails du film"}>
         <Box p={4} sx={{color: 'white', backgroundColor: '#121212'}}>
+            <Stack direction={"row"} mb={3}>
+                <IconButton onClick={
+                    () => navigate(-1)
+                }>
+                    <ArrowBackIos fontSize="large" sx={{ color: "#800000" }}/>
+                    <Typography sx={{fontSize: 24, color: "#800000"}}>Retour</Typography>
+                </IconButton>
+            </Stack>
             <img
                 src={baseUrl + movie.poster_path}
                 alt={movie.title}

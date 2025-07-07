@@ -115,7 +115,7 @@ export default function PrimarySearchAppBar() {
                         component="div"
                         sx={{display: {xs: 'none', sm: 'block', cursor: "pointer"}}}
                     >
-                        SadTrack
+                        Sad<span style={{color: "black"}}>Track</span>
                     </Typography>
                     <Search>
                         <SearchIconWrapper>

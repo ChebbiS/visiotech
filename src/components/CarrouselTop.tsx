@@ -8,9 +8,9 @@ export default function MovieCarousel() {
     const [movies, setMovies] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
     const navigate = useNavigate();
-
+    const API_KEY = "c5817db100db1e3666ffaa6a17957b09";
     useEffect(() => {
-        fetch("../../../src/dataFake/movie_top_rated.json")
+        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=fr-FR&page=1`)
             .then((res) => res.json())
             .then((data) => setMovies(data.results || []))
             .catch((err) => console.error("Erreur de chargement des films :", err));

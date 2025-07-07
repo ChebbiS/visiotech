@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {bindMenu, bindTrigger, usePopupState,} from 'material-ui-popup-state/hooks';
 import MenuIcon from "@mui/icons-material/Menu";
 import {useNavigate} from "react-router";
-import {useMediaQuery, useTheme} from '@mui/material'; // Import des hooks nécessaires
+import {useMediaQuery, useTheme} from '@mui/material';
 
 const Drawer = () => {
     const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' });

@@ -47,7 +47,7 @@ const PeopleDetails = () => {
     if (loading) {
         return (
             <Box display="flex" justifyContent="center" mt={4}>
-                <CircularProgress />
+                <CircularProgress sx={{color:"#800000"}}/>
             </Box>
         );
     }
@@ -62,12 +62,12 @@ const PeopleDetails = () => {
 
     return (
         <Pages title={"People Details"}>
-            <Stack direction={"row"} mb={2}>
-                <IconButton
-                    onClick={() => navigate(-1)}
-                    sx={{ zIndex: 1, color: "white" }}
-                >
-                    <ArrowBackIos fontSize="large" sx={{ color: "white" }} />
+            <Stack direction={"row"} mb={3}>
+                <IconButton onClick={
+                    () => navigate(-1)
+                }>
+                    <ArrowBackIos fontSize="large" sx={{color: "#800000"}}/>
+                    <Typography sx={{fontSize: 24, color: "#800000"}}>Retour</Typography>
                 </IconButton>
             </Stack>
 

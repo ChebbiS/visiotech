@@ -3,31 +3,56 @@ import {Box, Card, CardMedia, IconButton, Stack, Typography} from "@mui/material
 import {ArrowBackIos, ArrowForwardIos} from "@mui/icons-material";
 import {useNavigate} from 'react-router';
 
-const CARDS_PER_VIEW = 4;
+
+
 
 export default function MovieCarousel() {
     const [movies, setMovies] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
     const navigate = useNavigate();
+    const API_KEY = "c5817db100db1e3666ffaa6a17957b09";
+    const [cardsPerView, setCardsPerView] = useState(4);
 
     useEffect(() => {
-        fetch("../../../src/dataFake/movie_popular.json")
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=2`)
             .then((res) => res.json())
             .then((data) => setMovies(data.results || []))
             .catch((err) => console.error("Erreur de chargement des films :", err));
     }, []);
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width < 600) {
+                setCardsPerView(1);
+            } else if (width < 960) {
+                setCardsPerView(2);
+            } else {
+                setCardsPerView(4);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     const handlePrev = () => {
-        setStartIndex((prev) => Math.max(0, prev - CARDS_PER_VIEW));
+        setStartIndex((prev) => Math.max(0, prev - cardsPerView));
+
     };
 
     const handleNext = () => {
         setStartIndex((prev) =>
-            Math.min(prev + CARDS_PER_VIEW, movies.length - CARDS_PER_VIEW)
+            Math.min(prev + cardsPerView, movies.length - cardsPerView)
         );
+
     };
 
-    const visibleMovies = movies.slice(startIndex, startIndex + CARDS_PER_VIEW);
+    const visibleMovies = movies.slice(startIndex, startIndex + cardsPerView);
+
 
     return (
         <Box sx={{
@@ -95,7 +120,7 @@ export default function MovieCarousel() {
                     ))}
                     <IconButton
                         onClick={handleNext}
-                        disabled={startIndex + CARDS_PER_VIEW >= movies.length}
+                        disabled={startIndex + cardsPerView >= movies.length}
                         sx={{zIndex: 1, color: "white"}}
                     >
                         <ArrowForwardIos/>

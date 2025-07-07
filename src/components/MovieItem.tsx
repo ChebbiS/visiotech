@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {Card, CardMedia, Box, Typography} from "@mui/material";
 import {useNavigate} from 'react-router';
-
+import type {MovieDetails} from "../@types/MovieDetails";
 const API_KEY = "c5817db100db1e3666ffaa6a17957b09";
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
 const MovieItem = ({movieId}: { movieId: number }) => {
-    const [movie, setMovie] = useState<any>(null);
+    const [movie, setMovie] = useState<MovieDetails>();
     const navigate = useNavigate();
 
     useEffect(() => {
